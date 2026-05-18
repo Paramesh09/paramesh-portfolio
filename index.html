@@ -304,7 +304,9 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
       <p class="hero-intro">MERN stack engineer crafting high-performance web applications, AI-powered dashboards, and enterprise-grade systems — from Pondicherry, India.</p>
       <div class="hero-btns">
         <a href="#projects" class="btn-primary">⚡ View Projects</a>
-        <a href="#" class="btn-secondary" id="dl-resume">↓ Download Resume</a>
+       <!-- <a href="./resume.pdf" target="_blank" class="btn-secondary">
+  View Resume
+</a> -->
         <a href="#contact" class="btn-ghost">✉ Contact Me</a>
       </div>
     </div>
@@ -374,7 +376,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
 <!-- ABOUT -->
 <section id="about">
   <div class="section-container">
-    <div class="section-label">01. Who Am I</div>
+    <!-- <div class="section-label">01. Who Am I</div> -->
     <h2 class="section-title">About <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Me</span></h2>
     <div class="section-line"></div>
     <div class="about-grid">
@@ -406,7 +408,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
 <!-- EXPERIENCE -->
 <section id="experience">
   <div class="section-container">
-    <div class="section-label">02. Career</div>
+    <!-- <div class="section-label">02. Career</div> -->
     <h2 class="section-title">Work <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Experience</span></h2>
     <div class="section-line"></div>
     <div class="timeline">
@@ -472,7 +474,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-container">
-    <div class="section-label">03. Toolkit</div>
+    <!-- <div class="section-label">03. Toolkit</div> -->
     <h2 class="section-title">Skills & <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Technologies</span></h2>
     <div class="section-line"></div>
     <div class="skills-grid">
@@ -539,7 +541,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-container">
-    <div class="section-label">04. Work</div>
+    <!-- <div class="section-label">04. Work</div> -->
     <h2 class="section-title">Featured <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Projects</span></h2>
     <div class="section-line"></div>
     <div class="projects-filter">
@@ -641,7 +643,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
 <!-- EDUCATION -->
 <section id="education">
   <div class="section-container">
-    <div class="section-label">05. Academic</div>
+    <!-- <div class="section-label">05. Academic</div> -->
     <h2 class="section-title">Education</h2>
     <div class="section-line"></div>
     <div class="edu-card fade-in">
@@ -663,7 +665,7 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-container">
-    <div class="section-label">06. Get In Touch</div>
+    <!-- <div class="section-label">06. Get In Touch</div> -->
     <h2 class="section-title">Let's <span style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Connect</span></h2>
     <div class="section-line"></div>
     <div class="contact-grid">
@@ -689,14 +691,15 @@ footer{background:var(--bg);border-top:1px solid var(--border);padding:2rem;text
             <div class="contact-link-icon">💼</div>
             <div>
               <div style="font-weight:600;color:var(--text);font-size:.85rem">LinkedIn</div>
-              <div style="font-size:.78rem">linkedin.com/in/paramesh</div>
+              <div style="font-size:.78rem">linkedin.com/in/paramesh-m-566783322
+</div>
             </div>
           </a>
           <a href="#" class="contact-link">
             <div class="contact-link-icon">🐙</div>
             <div>
               <div style="font-weight:600;color:var(--text);font-size:.85rem">GitHub</div>
-              <div style="font-size:.78rem">github.com/paramesh</div>
+              <div style="font-size:.78rem">github.com/Paramesh09</div>
             </div>
           </a>
         </div>
@@ -867,11 +870,6 @@ function sendMessage(){
   },1500);
 }
 
-// RESUME DOWNLOAD
-document.getElementById('dl-resume').addEventListener('click',e=>{
-  e.preventDefault();
-  alert('Resume download — add your resume PDF link here!');
-});
 
 // CURSOR GLOW EFFECT
 let mouseX=0,mouseY=0;
