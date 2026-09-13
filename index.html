@@ -12,19 +12,27 @@
 <meta property="og:description" content="Building scalable web products, real-time systems and AI-powered interfaces.">
 <meta property="og:image" content="profile.png">
 <link rel="canonical" href="https://paramesh09.github.io/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070707'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='700' fill='%23f5f5f0' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23090908'/%3E%3Crect x='1' y='1' width='30' height='30' fill='none' stroke='%23ff9d3d' stroke-opacity='.5'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%23ff9d3d' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- LOADER -->
-<div class="loader" id="loader" aria-hidden="true">
-  <div class="loader-mark">PM</div>
-  <div class="loader-bar"><span id="loaderProgress"></span></div>
+<!-- SYSTEM BOOT -->
+<div class="boot" id="boot" role="status" aria-live="polite">
+  <div class="boot-inner">
+    <p class="boot-title">SYSTEM INITIALIZING<span class="boot-cursor">_</span></p>
+    <ul class="boot-checks" id="bootChecks">
+      <li data-status="VERIFIED"><span class="boot-label">IDENTITY</span><span class="boot-dots" aria-hidden="true"></span><span class="boot-status"></span></li>
+      <li data-status="ONLINE"><span class="boot-label">INTERFACE</span><span class="boot-dots" aria-hidden="true"></span><span class="boot-status"></span></li>
+      <li data-status="ONLINE"><span class="boot-label">API</span><span class="boot-dots" aria-hidden="true"></span><span class="boot-status"></span></li>
+      <li data-status="CONNECTED"><span class="boot-label">DATABASE</span><span class="boot-dots" aria-hidden="true"></span><span class="boot-status"></span></li>
+      <li data-status="READY"><span class="boot-label">SYSTEM</span><span class="boot-dots" aria-hidden="true"></span><span class="boot-status"></span></li>
+    </ul>
+  </div>
 </div>
 
 <!-- CUSTOM CURSOR -->
@@ -33,23 +41,25 @@
   <div class="cursor-ring"><span class="cursor-label" id="cursorLabel"></span></div>
 </div>
 
-<!-- GRAIN -->
+<!-- ATMOSPHERE -->
 <div class="grain" aria-hidden="true"></div>
+<div class="scanlines" aria-hidden="true"></div>
 
 <a class="skip-link" href="#main">Skip to content</a>
 
 <!-- NAV -->
 <header class="site-nav" id="siteNav">
   <div class="nav-inner">
-    <a href="#top" class="nav-logo">PARAMESH</a>
+    <a href="#top" class="nav-logo">PARAMESH<span class="nav-logo-sub">// SYS.PM-09</span></a>
     <nav class="nav-links" aria-label="Primary">
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#stack">Stack</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
+      <a href="#projects"><span class="nav-index">01</span>Archive</a>
+      <a href="#architecture"><span class="nav-index">02</span>Architecture</a>
+      <a href="#experience"><span class="nav-index">03</span>Timeline</a>
+      <a href="#stack"><span class="nav-index">04</span>Systems</a>
+      <a href="#about"><span class="nav-index">05</span>About</a>
+      <a href="#contact"><span class="nav-index">06</span>Contact</a>
     </nav>
-    <a href="#contact" class="nav-cta" data-cursor="open">Let's Talk <span class="arrow">→</span></a>
+    <a href="#contact" class="nav-cta magnetic" data-cursor="CONNECT">Transmit <span class="arrow">→</span></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
       <span></span><span></span>
     </button>
@@ -59,11 +69,12 @@
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
   <nav aria-label="Mobile primary">
-    <a href="#projects" class="mobile-link">Projects</a>
-    <a href="#experience" class="mobile-link">Experience</a>
-    <a href="#stack" class="mobile-link">Stack</a>
-    <a href="#about" class="mobile-link">About</a>
-    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#projects" class="mobile-link"><span>01</span>Archive</a>
+    <a href="#architecture" class="mobile-link"><span>02</span>Architecture</a>
+    <a href="#experience" class="mobile-link"><span>03</span>Timeline</a>
+    <a href="#stack" class="mobile-link"><span>04</span>Systems</a>
+    <a href="#about" class="mobile-link"><span>05</span>About</a>
+    <a href="#contact" class="mobile-link"><span>06</span>Contact</a>
   </nav>
   <div class="mobile-menu-footer">
     <a href="mailto:parameshmesh06@gmail.com">parameshmesh06@gmail.com</a>
@@ -77,206 +88,237 @@
 <section id="top" class="hero">
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-inner">
-    <div class="hero-meta hero-meta-top">
-      <span>PUDUCHERRY / INDIA</span>
-      <span>2.8+ YEARS EXPERIENCE</span>
-      <span class="available"><i></i>AVAILABLE FOR OPPORTUNITIES</span>
-    </div>
+    <div class="hero-copy">
+      <div class="hero-tag reveal-up">SYSTEM // PM-09</div>
 
-    <h1 class="hero-title">
-      <span class="hero-title-line"><span class="reveal">PARAMESH</span></span>
-    </h1>
+      <div class="hero-id reveal-up">
+        <span class="hero-name">PARAMESH M</span>
+        <span class="hero-role">NODE.JS / FULL STACK DEVELOPER</span>
+      </div>
 
-    <div class="hero-role">
-      <span class="hero-title-line"><span class="reveal">MERN STACK / NODE.JS FULL STACK DEVELOPER</span></span>
-    </div>
+      <h1 class="hero-title">
+        <span class="hero-title-line"><span class="reveal">BUILDING DIGITAL</span></span>
+        <span class="hero-title-line"><span class="reveal">SYSTEMS THAT <em>WORK.</em></span></span>
+      </h1>
 
-    <p class="hero-description">I build scalable web products, real-time systems and AI-powered interfaces.</p>
+      <div class="hero-meta reveal-up">
+        <span>PUDUCHERRY / INDIA</span>
+        <span>2.8+ YEARS EXPERIENCE</span>
+        <span class="status-led"><i></i>STATUS: AVAILABLE FOR OPPORTUNITIES</span>
+      </div>
 
-    <div class="hero-actions">
-      <a href="#projects" class="btn-primary magnetic" data-cursor="open"><span>View Projects</span></a>
-      <a href="#contact" class="btn-outline magnetic" data-cursor="open"><span>Get in touch</span></a>
+      <div class="hero-actions reveal-up">
+        <a href="#projects" class="btn-primary magnetic" data-cursor="OPEN"><span>View Projects</span></a>
+        <a href="#contact" class="btn-outline magnetic" data-cursor="CONNECT"><span>Start a Conversation</span></a>
+      </div>
     </div>
   </div>
 
   <div class="hero-visual">
+    <div class="hero-visual-tags">
+      <span class="hero-visual-tag">SUBJECT // PM-09</span>
+      <span class="hero-visual-tag">VERIFIED // PUDUCHERRY</span>
+    </div>
     <div class="hero-visual-glow" aria-hidden="true"></div>
-    <div class="hero-visual-plate" aria-hidden="true"></div>
     <div class="hero-visual-frame">
-      <img src="profile.png" alt="Portrait of Paramesh" class="hero-image" width="600" height="750">
-      <div class="hero-visual-sheen" aria-hidden="true"></div>
+      <img src="profile.png" alt="Portrait of Paramesh M" class="hero-image" width="600" height="750">
+      <div class="hero-visual-scan" aria-hidden="true"></div>
+      <div class="hero-visual-corners" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </div>
     </div>
   </div>
 
   <div class="scroll-indicator" aria-hidden="true">
-    <span>01 — 05</span>
+    <span>SCROLL</span>
     <div class="scroll-line"><i></i></div>
   </div>
 </section>
 
-<!-- PROJECTS -->
-<section id="projects" class="work">
+<!-- PROJECT ARCHIVE -->
+<section id="projects" class="archive">
   <div class="section-container">
     <div class="section-head">
       <span class="section-index">01</span>
-      <h2 class="section-heading">Projects</h2>
+      <h2 class="section-heading">Project Archive</h2>
     </div>
 
-    <div class="work-list" id="workList">
+    <div class="archive-list" id="archiveList">
 
-      <article class="work-row" data-preview="work-preview-1">
-        <div class="work-row-top">
-          <h3 class="work-title">Otonomiq</h3>
-          <span class="work-arrow">→</span>
-        </div>
-        <div class="work-row-meta">
-          <span class="work-category">Hotel Management Platform</span>
-          <span class="work-tech">Next.js · React.js · TypeScript · AI Integration</span>
-        </div>
-        <div class="work-details">
-          <p class="work-desc">AI-powered hotel management platform with booking workflows, analytics dashboards and AI-assisted guest conversations.</p>
-          <dl class="work-case">
-            <div><dt>Role</dt><dd>Frontend / Full Stack contribution</dd></div>
-            <div><dt>Built</dt><dd>Room management, booking dashboards, AI conversation monitoring, revenue insights, forecasting and analytics visualization</dd></div>
-          </dl>
+      <article class="archive-row" data-id="001">
+        <button class="archive-toggle" aria-expanded="false" aria-controls="proj-001-panel" data-cursor="SCAN">
+          <span class="archive-id">001</span>
+          <span class="archive-name">Otonomiq</span>
+          <span class="archive-arrow" aria-hidden="true">→</span>
+        </button>
+        <div class="archive-tech"><span class="archive-category">Hotel Management Platform</span> — NEXT.JS · REACT.JS · TYPESCRIPT · AI INTEGRATION</div>
+
+        <div class="archive-panel" id="proj-001-panel">
+          <div class="archive-panel-inner">
+            <div class="archive-info">
+              <p class="archive-desc">AI-powered hotel management platform with booking workflows, analytics dashboards and AI-assisted guest conversations.</p>
+              <dl class="archive-facts">
+                <div><dt>Role</dt><dd>Frontend / Full Stack contribution</dd></div>
+                <div><dt>Built</dt><dd>Room management, booking dashboards, AI conversation monitoring, revenue insights, forecasting and analytics visualization</dd></div>
+              </dl>
+            </div>
+            <div class="archive-viz viz-otonomiq" aria-hidden="true">
+              <span class="viz-tag">BOOKING TIMELINE</span>
+              <div class="viz-track">
+                <i style="width:38%"></i><i style="width:64%"></i><i style="width:22%"></i><i style="width:80%"></i><i style="width:46%"></i>
+              </div>
+              <span class="viz-tag">AI INSIGHT</span>
+              <div class="viz-dotrow">
+                <i class="pulse"></i><i class="pulse" style="animation-delay:.3s"></i><i class="pulse" style="animation-delay:.6s"></i>
+              </div>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="work-row" data-preview="work-preview-2">
-        <div class="work-row-top">
-          <h3 class="work-title">SnacWorkspace</h3>
-          <span class="work-arrow">→</span>
-        </div>
-        <div class="work-row-meta">
-          <span class="work-category">Restaurant Management Platform</span>
-          <span class="work-tech">Next.js · React.js · AI Analytics</span>
-        </div>
-        <div class="work-details">
-          <p class="work-desc">Restaurant operations platform with inventory tracking, customer insights and AI-driven scenario simulation.</p>
-          <dl class="work-case">
-            <div><dt>Role</dt><dd>Frontend Developer</dd></div>
-            <div><dt>Built</dt><dd>Inventory and menu management, operational metrics, AI recommendations, scenario simulation, order management and real-time alerts</dd></div>
-          </dl>
+      <article class="archive-row" data-id="002">
+        <button class="archive-toggle" aria-expanded="false" aria-controls="proj-002-panel" data-cursor="SCAN">
+          <span class="archive-id">002</span>
+          <span class="archive-name">SnacWorkspace</span>
+          <span class="archive-arrow" aria-hidden="true">→</span>
+        </button>
+        <div class="archive-tech"><span class="archive-category">Restaurant Management Platform</span> — NEXT.JS · REACT.JS · AI ANALYTICS</div>
+
+        <div class="archive-panel" id="proj-002-panel">
+          <div class="archive-panel-inner">
+            <div class="archive-info">
+              <p class="archive-desc">Restaurant operations platform with inventory tracking, customer insights and AI-driven scenario simulation.</p>
+              <dl class="archive-facts">
+                <div><dt>Role</dt><dd>Frontend Developer</dd></div>
+                <div><dt>Built</dt><dd>Inventory and menu management, operational metrics, AI recommendations, scenario simulation, order management and real-time alerts</dd></div>
+              </dl>
+            </div>
+            <div class="archive-viz viz-snac" aria-hidden="true">
+              <span class="viz-tag">INVENTORY MATRIX</span>
+              <div class="viz-grid">
+                <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <span class="viz-tag">ORDER FLOW</span>
+              <div class="viz-flowline"><i></i></div>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="work-row" data-preview="work-preview-3">
-        <div class="work-row-top">
-          <h3 class="work-title">PraanaCore</h3>
-          <span class="work-arrow">→</span>
-        </div>
-        <div class="work-row-meta">
-          <span class="work-category">Fitness / Health Platform</span>
-          <span class="work-tech">Node.js · Express.js · MySQL · REST APIs</span>
-        </div>
-        <div class="work-details">
-          <p class="work-desc">Fitness and health tracking backend focused on rucking, with heart-rate based scoring and leaderboard systems.</p>
-          <dl class="work-case">
-            <div><dt>Role</dt><dd>Backend Developer</dd></div>
-            <div><dt>Built</dt><dd>Heart-rate based scoring algorithm, zone-based performance tracking, weekly/monthly/yearly leaderboards and health metrics computation</dd></div>
-          </dl>
+      <article class="archive-row" data-id="003">
+        <button class="archive-toggle" aria-expanded="false" aria-controls="proj-003-panel" data-cursor="SCAN">
+          <span class="archive-id">003</span>
+          <span class="archive-name">PraanaCore</span>
+          <span class="archive-arrow" aria-hidden="true">→</span>
+        </button>
+        <div class="archive-tech"><span class="archive-category">Fitness / Health Platform</span> — NODE.JS · EXPRESS.JS · MYSQL · REST APIS</div>
+
+        <div class="archive-panel" id="proj-003-panel">
+          <div class="archive-panel-inner">
+            <div class="archive-info">
+              <p class="archive-desc">Fitness and health tracking backend focused on rucking, with heart-rate based scoring and leaderboard systems.</p>
+              <dl class="archive-facts">
+                <div><dt>Role</dt><dd>Backend Developer</dd></div>
+                <div><dt>Built</dt><dd>Heart-rate based scoring algorithm, zone-based performance tracking, weekly / monthly / yearly leaderboards and health metrics computation</dd></div>
+              </dl>
+            </div>
+            <div class="archive-viz viz-praana" aria-hidden="true">
+              <span class="viz-tag">HEART RATE WAVEFORM</span>
+              <svg class="viz-heartbeat" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,15 18,15 23,4 28,26 33,15 55,15 60,7 65,23 70,15 100,15"/></svg>
+              <span class="viz-tag">PERFORMANCE ZONES</span>
+              <div class="viz-ring"></div>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="work-row" data-preview="work-preview-4">
-        <div class="work-row-top">
-          <h3 class="work-title">Avalbl</h3>
-          <span class="work-arrow">→</span>
-        </div>
-        <div class="work-row-meta">
-          <span class="work-category">Talent Acquisition Platform</span>
-          <span class="work-tech">MongoDB · Express.js · React.js · Node.js · Socket.IO</span>
-        </div>
-        <div class="work-details">
-          <p class="work-desc">Talent acquisition platform with real-time, socket-based notifications and a Material UI interface.</p>
-          <dl class="work-case">
-            <div><dt>Role</dt><dd>Full Stack Developer (MERN)</dd></div>
-            <div><dt>Built</dt><dd>Real-time notifications, online/offline presence tracking, email template management and responsive Material UI interfaces</dd></div>
-          </dl>
+      <article class="archive-row" data-id="004">
+        <button class="archive-toggle" aria-expanded="false" aria-controls="proj-004-panel" data-cursor="SCAN">
+          <span class="archive-id">004</span>
+          <span class="archive-name">Avalbl</span>
+          <span class="archive-arrow" aria-hidden="true">→</span>
+        </button>
+        <div class="archive-tech"><span class="archive-category">Talent Acquisition Platform</span> — MONGODB · EXPRESS.JS · REACT.JS · NODE.JS · SOCKET.IO</div>
+
+        <div class="archive-panel" id="proj-004-panel">
+          <div class="archive-panel-inner">
+            <div class="archive-info">
+              <p class="archive-desc">Talent acquisition platform with real-time, socket-based notifications and a Material UI interface.</p>
+              <dl class="archive-facts">
+                <div><dt>Role</dt><dd>Full Stack Developer (MERN)</dd></div>
+                <div><dt>Built</dt><dd>Real-time notifications, online / offline presence tracking, email template management and responsive Material UI interfaces</dd></div>
+              </dl>
+            </div>
+            <div class="archive-viz viz-avalbl" aria-hidden="true">
+              <span class="viz-tag">PRESENCE</span>
+              <div class="viz-presence">
+                <div class="viz-row"><i class="dot on"></i><span></span></div>
+                <div class="viz-row"><i class="dot"></i><span></span></div>
+                <div class="viz-row"><i class="dot on"></i><span></span></div>
+              </div>
+              <span class="viz-tag">CONNECTION</span>
+              <div class="viz-ping"><i></i><i></i></div>
+            </div>
+          </div>
         </div>
       </article>
 
     </div>
   </div>
 
-  <div class="work-preview" id="workPreview" aria-hidden="true">
-    <div class="work-preview-inner" id="work-preview-1">
-      <div class="viz viz-hotel" aria-hidden="true">
-        <span class="viz-bar" style="width:70%"></span>
-        <span class="viz-bar" style="width:45%"></span>
-        <span class="viz-bar" style="width:85%"></span>
-        <div class="viz-chart"><i></i><i></i><i></i><i></i><i></i></div>
-      </div>
-      <span class="viz-caption">HOTEL TECH</span>
-    </div>
-    <div class="work-preview-inner" id="work-preview-2">
-      <div class="viz viz-restaurant" aria-hidden="true">
-        <div class="viz-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="viz-line"></span>
-      </div>
-      <span class="viz-caption">RESTAURANT TECH</span>
-    </div>
-    <div class="work-preview-inner" id="work-preview-3">
-      <div class="viz viz-fitness" aria-hidden="true">
-        <svg class="viz-heartbeat" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline points="0,15 20,15 25,4 30,26 35,15 55,15 60,8 65,22 70,15 100,15"/></svg>
-        <span class="viz-ring"></span>
-      </div>
-      <span class="viz-caption">FITNESS TECH</span>
-    </div>
-    <div class="work-preview-inner" id="work-preview-4">
-      <div class="viz viz-talent" aria-hidden="true">
-        <div class="viz-row"><i class="dot on"></i><span></span></div>
-        <div class="viz-row"><i class="dot"></i><span></span></div>
-        <div class="viz-row"><i class="dot on"></i><span></span></div>
-      </div>
-      <span class="viz-caption">HR TECH</span>
-    </div>
-  </div>
+  <div class="archive-cursor-tag" id="archiveCursorTag" aria-hidden="true"><span id="archiveCursorTagText"></span></div>
 </section>
 
-<!-- ENGINEERING / SYSTEM -->
-<section class="engineering">
-  <div class="section-container">
-    <span class="section-label">How it's built</span>
-    <div class="system-diagram" aria-hidden="true">
-      <div class="system-line">SYSTEM</div>
-      <div class="system-line indent-1">├── API</div>
-      <div class="system-line indent-1">├── DATABASE</div>
-      <div class="system-line indent-1">├── AUTH</div>
-      <div class="system-line indent-1">├── REALTIME</div>
-      <div class="system-line indent-1">├── CLOUD</div>
-      <div class="system-line indent-1 last">└── UI</div>
-    </div>
-    <div class="build-flow" id="buildFlow">
-      <span class="build-node">CLIENT</span>
-      <span class="build-connector"></span>
-      <span class="build-node">API</span>
-      <span class="build-connector"></span>
-      <span class="build-node">SERVICE</span>
-      <span class="build-connector"></span>
-      <span class="build-node">DATABASE</span>
-      <span class="build-connector"></span>
-      <span class="build-node">CACHE</span>
-      <span class="build-connector"></span>
-      <span class="build-node">CLOUD</span>
-      <span class="build-connector"></span>
-      <span class="build-node">USER</span>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" class="experience">
+<!-- ENGINEERING ARCHITECTURE -->
+<section id="architecture" class="architecture">
   <div class="section-container">
     <div class="section-head">
       <span class="section-index">02</span>
-      <h2 class="section-heading">Experience</h2>
+      <h2 class="section-heading">Engineering Architecture</h2>
     </div>
 
-    <div class="timeline">
-      <article class="timeline-row">
-        <div class="timeline-year">2025<span>—</span>NOW</div>
-        <div class="timeline-body">
+    <div class="arch-diagram" id="archDiagram">
+      <ul class="arch-main">
+        <li class="arch-node" data-node>CLIENT</li>
+        <li class="arch-connector" aria-hidden="true"><i class="packet"></i></li>
+        <li class="arch-node" data-node>API</li>
+        <li class="arch-connector" aria-hidden="true"><i class="packet"></i></li>
+        <li class="arch-core">
+          <span class="arch-node arch-node--core" data-node>SERVICES</span>
+          <ul class="arch-branches">
+            <li class="arch-branch"><span class="branch-line" aria-hidden="true"></span><span class="branch-label">AUTH</span></li>
+            <li class="arch-branch"><span class="branch-line" aria-hidden="true"></span><span class="branch-label">REALTIME</span></li>
+            <li class="arch-branch"><span class="branch-line" aria-hidden="true"></span><span class="branch-label">QUEUE</span></li>
+            <li class="arch-branch"><span class="branch-line" aria-hidden="true"></span><span class="branch-label">OBSERVABILITY</span></li>
+          </ul>
+        </li>
+        <li class="arch-connector" aria-hidden="true"><i class="packet"></i></li>
+        <li class="arch-node" data-node>DATABASE</li>
+        <li class="arch-connector" aria-hidden="true"><i class="packet"></i></li>
+        <li class="arch-node" data-node>CACHE</li>
+        <li class="arch-connector" aria-hidden="true"><i class="packet"></i></li>
+        <li class="arch-node" data-node>CLOUD</li>
+      </ul>
+      <div class="arch-status"><i class="led" id="archLed"></i><span id="archStatusText">SYSTEM STANDBY</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE TIMELINE -->
+<section id="experience" class="experience">
+  <div class="section-container">
+    <div class="section-head">
+      <span class="section-index">03</span>
+      <h2 class="section-heading">Experience Timeline</h2>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="timeline-rail" aria-hidden="true"><i id="timelineFill"></i></div>
+
+      <article class="timeline-row is-current">
+        <div class="timeline-year"><i class="timeline-dot" aria-hidden="true"></i>2025<span>—</span>NOW</div>
+        <span class="timeline-branch" aria-hidden="true"></span>
+        <div class="timeline-card">
           <h3 class="timeline-company">Redblox Technologies</h3>
           <p class="timeline-role">Full Stack Developer · Dec 2025 – Present</p>
           <ul class="timeline-list">
@@ -292,8 +334,9 @@
       </article>
 
       <article class="timeline-row">
-        <div class="timeline-year">2023<span>—</span>2025</div>
-        <div class="timeline-body">
+        <div class="timeline-year"><i class="timeline-dot" aria-hidden="true"></i>2023<span>—</span>2025</div>
+        <span class="timeline-branch" aria-hidden="true"></span>
+        <div class="timeline-card">
           <h3 class="timeline-company">Twilight IT Solutions</h3>
           <p class="timeline-role">Software Developer · Nov 2023 – Jul 2025</p>
           <ul class="timeline-list">
@@ -312,53 +355,68 @@
   </div>
 </section>
 
-<!-- STACK -->
+<!-- TECHNOLOGY MATRIX -->
 <section id="stack" class="stack">
   <div class="section-container">
     <div class="section-head">
-      <span class="section-index">03</span>
-      <h2 class="section-heading">Stack</h2>
+      <span class="section-index">04</span>
+      <h2 class="section-heading">Technology Matrix</h2>
     </div>
 
-    <div class="stack-wall">
-      <div class="stack-column">
+    <div class="matrix">
+      <div class="matrix-col">
+        <span class="matrix-node" aria-hidden="true"></span>
         <h3>Frontend</h3>
         <ul>
-          <li data-desc="Component-based UI library for building interfaces.">React.js</li>
-          <li data-desc="React framework for server rendering and routing.">Next.js</li>
-          <li data-desc="Typed superset of JavaScript used for safer application code.">TypeScript</li>
-          <li data-desc="Core scripting language of the web.">JavaScript</li>
-          <li data-desc="Utility-first CSS framework for building UI quickly.">Tailwind CSS</li>
+          <li><button class="module" aria-expanded="false" data-desc="Component-based UI library for building interfaces.">React.js</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="React framework for server rendering and routing.">Next.js</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Core scripting language of the web.">JavaScript</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Typed superset of JavaScript used for safer application code.">TypeScript</button></li>
         </ul>
       </div>
-      <div class="stack-column">
+      <div class="matrix-col">
+        <span class="matrix-node" aria-hidden="true"></span>
         <h3>Backend</h3>
         <ul>
-          <li data-desc="Server-side JavaScript runtime used for scalable backend services.">Node.js</li>
-          <li data-desc="Minimal web framework for building REST APIs on Node.js.">Express.js</li>
-          <li data-desc="Uniform interface for client-server communication.">REST APIs</li>
-          <li data-desc="Library for real-time, bidirectional communication.">Socket.IO</li>
-          <li data-desc="Query language for requesting exactly the data an API needs.">GraphQL</li>
+          <li><button class="module" aria-expanded="false" data-desc="Server-side JavaScript runtime used for scalable backend services.">Node.js</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Minimal web framework for building REST APIs on Node.js.">Express.js</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Uniform interface for client-server communication.">REST APIs</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Library for real-time, bidirectional communication.">Socket.IO</button></li>
         </ul>
       </div>
-      <div class="stack-column">
+      <div class="matrix-col">
+        <span class="matrix-node" aria-hidden="true"></span>
         <h3>Database</h3>
         <ul>
-          <li data-desc="Document-oriented NoSQL database.">MongoDB</li>
-          <li data-desc="Relational database with strong consistency guarantees.">PostgreSQL</li>
-          <li data-desc="Widely used open-source relational database.">MySQL</li>
-          <li data-desc="In-memory store used for caching and sessions.">Redis</li>
+          <li><button class="module" aria-expanded="false" data-desc="Document-oriented NoSQL database.">MongoDB</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Relational database with strong consistency guarantees.">PostgreSQL</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Widely used open-source relational database.">MySQL</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="In-memory store used for caching and sessions.">Redis</button></li>
         </ul>
       </div>
-      <div class="stack-column">
-        <h3>Cloud &amp; Tools</h3>
+      <div class="matrix-col">
+        <span class="matrix-node" aria-hidden="true"></span>
+        <h3>Cloud</h3>
         <ul>
-          <li data-desc="Virtual servers used to host and run applications.">AWS EC2</li>
-          <li data-desc="Object storage for files and static assets.">AWS S3</li>
-          <li data-desc="Managed relational database service.">AWS RDS</li>
-          <li data-desc="Container platform for consistent deployments.">Docker</li>
-          <li data-desc="CI/CD automation for build and deploy pipelines.">GitHub Actions</li>
-          <li data-desc="Testing frameworks used for unit and integration tests.">Jest / Mocha</li>
+          <li><button class="module" aria-expanded="false" data-desc="Virtual servers used to host and run applications.">AWS EC2</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Object storage for files and static assets.">AWS S3</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Managed relational database service.">AWS RDS</button></li>
+        </ul>
+      </div>
+      <div class="matrix-col">
+        <span class="matrix-node" aria-hidden="true"></span>
+        <h3>DevOps</h3>
+        <ul>
+          <li><button class="module" aria-expanded="false" data-desc="Container platform for consistent deployments.">Docker</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="CI/CD automation for build and deploy pipelines.">GitHub Actions</button></li>
+        </ul>
+      </div>
+      <div class="matrix-col">
+        <span class="matrix-node" aria-hidden="true"></span>
+        <h3>Testing</h3>
+        <ul>
+          <li><button class="module" aria-expanded="false" data-desc="JavaScript testing framework for unit and integration tests.">Jest</button></li>
+          <li><button class="module" aria-expanded="false" data-desc="Flexible test framework for Node.js applications.">Mocha</button></li>
         </ul>
       </div>
     </div>
@@ -376,7 +434,7 @@
 <section id="about" class="philosophy">
   <div class="section-container">
     <div class="section-head">
-      <span class="section-index">04</span>
+      <span class="section-index">05</span>
       <h2 class="section-heading">About</h2>
     </div>
     <p class="philosophy-statement">I care about the part users don't see.</p>
@@ -400,33 +458,77 @@
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- CONTACT TERMINAL -->
 <section id="contact" class="contact">
   <div class="section-container">
-    <span class="section-index">05</span>
-    <h2 class="contact-statement">Have a problem<br>worth solving?</h2>
-    <p class="contact-sub">I'm open to full stack and backend roles, freelance work, and interesting technical problems.</p>
+    <div class="section-head">
+      <span class="section-index">06</span>
+      <h2 class="section-heading">Contact Terminal</h2>
+    </div>
 
-    <a href="mailto:parameshmesh06@gmail.com" class="contact-cta magnetic" data-cursor="open">
-      <span>Start a conversation</span><span class="arrow">→</span>
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
+        <span class="terminal-path">/comms/channel</span>
+      </div>
+      <div class="terminal-body">
+        <p class="terminal-line">&gt; COMMUNICATION CHANNEL</p>
+        <p class="terminal-line"><span id="terminalReadyText"></span><span class="terminal-cursor">_</span></p>
+        <p class="terminal-line terminal-muted">&gt; OPEN TO:</p>
+        <ul class="terminal-list">
+          <li>Full Stack Developer roles</li>
+          <li>Backend / Node.js roles</li>
+          <li>Freelance projects</li>
+          <li>Interesting technical problems</li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="mailto:parameshmesh06@gmail.com" class="contact-cta magnetic" data-cursor="CONNECT">
+      <span>Start a Conversation</span><span class="arrow">→</span>
     </a>
 
     <div class="contact-links">
-      <a href="mailto:parameshmesh06@gmail.com">parameshmesh06@gmail.com</a>
-      <a href="tel:+918438925751">+91 84389 25751</a>
-      <a href="https://linkedin.com/in/paramesh-m-566783322" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/Paramesh09" target="_blank" rel="noopener">GitHub</a>
+      <a href="mailto:parameshmesh06@gmail.com" data-cursor="CONNECT">EMAIL // parameshmesh06@gmail.com</a>
+      <a href="tel:+918438925751" data-cursor="CONNECT">PHONE // +91 84389 25751</a>
+      <a href="https://linkedin.com/in/paramesh-m-566783322" target="_blank" rel="noopener" data-cursor="OPEN">LINKEDIN</a>
+      <a href="https://github.com/Paramesh09" target="_blank" rel="noopener" data-cursor="OPEN">GITHUB</a>
     </div>
   </div>
 </section>
 
 </main>
 
+<!-- SYSTEM ASSISTANT -->
+<div class="assistant" id="assistant">
+  <button class="assistant-dial" id="assistantDial" aria-label="System assistant PM-09, show status">
+    <svg viewBox="0 0 60 60" class="assistant-svg" aria-hidden="true">
+      <circle cx="30" cy="30" r="27" class="dial-ring"></circle>
+      <g class="dial-ticks" stroke-linecap="round">
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(0 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(45 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(90 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(135 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(180 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(225 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(270 30 30)"></line>
+        <line x1="30" y1="6" x2="30" y2="11" transform="rotate(315 30 30)"></line>
+      </g>
+      <line x1="30" y1="30" x2="30" y2="13" class="dial-needle" id="dialNeedle"></line>
+      <circle cx="30" cy="30" r="3" class="dial-hub"></circle>
+    </svg>
+  </button>
+  <div class="assistant-bubble" id="assistantBubble" role="status" aria-live="polite">
+    <span class="assistant-tag">PM-09</span>
+    <span class="assistant-text" id="assistantText"></span>
+  </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="section-container footer-inner">
     <div>
-      <div class="footer-name">PARAMESH</div>
+      <div class="footer-name">PARAMESH M</div>
       <div class="footer-role">NODE.JS / FULL STACK DEVELOPER</div>
       <div class="footer-loc">PUDUCHERRY, INDIA</div>
     </div>
@@ -437,7 +539,7 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 Paramesh</span>
-      <span class="footer-built">Built with HTML, CSS, JavaScript &amp; GSAP</span>
+      <span class="footer-built">Built with HTML, CSS, JavaScript, GSAP &amp; Lenis</span>
       <button id="backToTop" class="back-to-top">Back to top ↑</button>
     </div>
   </div>

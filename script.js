@@ -30,28 +30,39 @@
   }
 
   /* ============================================
-     LOADER
+     SYSTEM BOOT
      ============================================ */
-  function initLoader() {
-    const loader = document.getElementById('loader');
-    const progress = document.getElementById('loaderProgress');
-    if (!loader) return Promise.resolve();
+  function initBoot() {
+    const boot = document.getElementById('boot');
+    if (!boot) return Promise.resolve();
+
+    const items = boot.querySelectorAll('.boot-checks li');
 
     return new Promise((resolve) => {
       const tl = gsap.timeline({
         onComplete: () => {
-          loader.style.display = 'none';
-          resolve();
+          gsap.to(boot, {
+            clipPath: 'inset(0 0 100% 0)',
+            duration: reduceMotion ? 0.01 : 0.6,
+            ease: 'power3.inOut',
+            onComplete: () => {
+              boot.style.display = 'none';
+              resolve();
+            },
+          });
         },
       });
 
-      tl.to(progress, { width: '100%', duration: reduceMotion ? 0.01 : 0.9, ease: 'power2.inOut' })
-        .to(loader, {
-          clipPath: 'inset(0 0 100% 0)',
-          duration: reduceMotion ? 0.01 : 0.6,
-          ease: 'power3.inOut',
-          delay: 0.05,
-        });
+      items.forEach((li, i) => {
+        const status = li.dataset.status || '';
+        const statusEl = li.querySelector('.boot-status');
+        tl.call(() => {
+          if (statusEl) statusEl.textContent = status;
+          li.classList.add('done');
+        }, null, i * (reduceMotion ? 0.01 : 0.22));
+      });
+
+      tl.to({}, { duration: reduceMotion ? 0.01 : 0.4 });
     });
   }
 
@@ -59,13 +70,13 @@
      HERO ANIMATION
      ============================================ */
   function initHeroAnimation() {
-    const tl = gsap.timeline({ delay: reduceMotion ? 0 : 0.15 });
+    const tl = gsap.timeline({ delay: reduceMotion ? 0 : 0.1 });
 
-    tl.from('.hero-meta-top', { y: 14, opacity: 0, duration: 0.7, ease: 'power3.out' })
+    tl.to('.hero-tag', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' })
+      .to('.hero-id', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
       .from('.hero-title .reveal', { yPercent: 110, duration: 0.9, ease: 'power4.out' }, '-=0.35')
-      .from('.hero-role .reveal', { yPercent: 110, duration: 0.7, ease: 'power4.out' }, '-=0.55')
-      .from('.hero-description', { y: 16, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.35')
-      .from('.hero-actions', { y: 16, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+      .to('.hero-meta', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+      .to('.hero-actions', { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
       .to('.hero-visual-frame', { clipPath: 'inset(0 0 0% 0)', duration: 1, ease: 'power3.inOut' }, '-=0.6')
       .call(() => document.querySelector('.hero-visual')?.classList.add('revealed'), null, '<0.3')
       .from('.scroll-indicator', { opacity: 0, duration: 0.6 }, '-=0.3');
@@ -128,13 +139,11 @@
       setY(e.clientY);
     });
 
-    const hoverables = document.querySelectorAll('a, button, .work-row, .stack-column li');
+    const hoverables = document.querySelectorAll('a, button, .module');
     hoverables.forEach((el) => {
       el.addEventListener('mouseenter', () => {
         cursor.classList.add('hover');
-        const context = el.dataset.cursor
-          || (el.matches('.work-row') ? 'view' : '')
-          || (el.closest('.stack-column') ? 'info' : '');
+        const context = el.dataset.cursor || (el.matches('.module') ? 'INFO' : '');
         if (context) {
           cursor.classList.add('link');
           if (label) label.textContent = context.toUpperCase();
@@ -147,148 +156,155 @@
   }
 
   /* ============================================
-     PROJECT INTERACTIONS (cursor preview)
+     PROJECT ARCHIVE
      ============================================ */
-  function initProjectInteractions() {
+  function initArchive() {
+    const rows = document.querySelectorAll('.archive-row');
+    if (!rows.length) return;
+
+    rows.forEach((row) => {
+      const btn = row.querySelector('.archive-toggle');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const isOpen = row.classList.toggle('is-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
     if (isTouch) return;
 
-    const preview = document.getElementById('workPreview');
-    const rows = document.querySelectorAll('.work-row');
-    if (!preview || !rows.length) return;
+    const tag = document.getElementById('archiveCursorTag');
+    const tagText = document.getElementById('archiveCursorTagText');
+    if (!tag || !tagText) return;
 
-    const setX = gsap.quickTo(preview, 'x', { duration: 0.5, ease: 'power3.out' });
-    const setY = gsap.quickTo(preview, 'y', { duration: 0.5, ease: 'power3.out' });
+    const setX = gsap.quickTo(tag, 'x', { duration: 0.4, ease: 'power3.out' });
+    const setY = gsap.quickTo(tag, 'y', { duration: 0.4, ease: 'power3.out' });
 
     window.addEventListener('mousemove', (e) => {
-      setX(e.clientX + 24);
-      setY(e.clientY - 75);
+      setX(e.clientX + 20);
+      setY(e.clientY + 20);
     });
 
     rows.forEach((row) => {
-      const targetId = row.dataset.preview;
+      const id = row.dataset.id || '';
+      const category = row.querySelector('.archive-category')?.textContent || '';
       row.addEventListener('mouseenter', () => {
-        preview.classList.add('active');
-        document.querySelectorAll('.work-preview-inner').forEach((el) => {
-          el.classList.toggle('show', el.id === targetId);
-        });
+        tagText.textContent = `${id} // SCAN — ${category.toUpperCase()}`;
+        tag.classList.add('active');
       });
       row.addEventListener('mouseleave', () => {
-        preview.classList.remove('active');
+        tag.classList.remove('active');
       });
     });
   }
 
   /* ============================================
-     SCROLL ANIMATIONS (general reveals)
+     ENGINEERING ARCHITECTURE DIAGRAM
      ============================================ */
-  function initScrollAnimations() {
-    gsap.utils.toArray('.philosophy-statement, .philosophy-text').forEach((el) => {
-      gsap.from(el, {
-        y: 24,
-        opacity: 0,
-        duration: 0.8,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 88%' },
-      });
-    });
+  function initArchitectureDiagram() {
+    const diagram = document.getElementById('archDiagram');
+    if (!diagram) return;
 
-    gsap.utils.toArray('.system-line').forEach((el, i) => {
-      gsap.to(el, {
-        opacity: 1,
-        x: 0,
-        duration: 0.5,
-        ease: 'power2.out',
-        delay: i * 0.06,
-        scrollTrigger: { trigger: '.system-diagram', start: 'top 85%' },
-      });
-    });
-
-    gsap.utils.toArray('.work-row').forEach((el) => {
-      gsap.from(el, {
-        y: 30,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: el, start: 'top 92%' },
-      });
-    });
-
-    gsap.utils.toArray('.stack-column').forEach((el, i) => {
-      gsap.from(el, {
-        y: 24,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        delay: (i % 4) * 0.08,
-        scrollTrigger: { trigger: el, start: 'top 92%' },
-      });
-    });
-
-    const contactStatement = document.querySelector('.contact-statement');
-    if (contactStatement) {
-      gsap.from(contactStatement, {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: contactStatement, start: 'top 90%' },
-      });
-    }
-
-    const eduRow = document.querySelector('.education-row');
-    if (eduRow) {
-      gsap.from(eduRow, {
-        y: 20,
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        scrollTrigger: { trigger: eduRow, start: 'top 92%' },
-      });
-    }
-  }
-
-  /* ============================================
-     EXPERIENCE ANIMATIONS
-     ============================================ */
-  function initExperienceAnimations() {
-    gsap.utils.toArray('.timeline-row').forEach((row) => {
-      const year = row.querySelector('.timeline-year');
-      const items = row.querySelectorAll('.timeline-list li');
-      const tags = row.querySelector('.timeline-tags');
-
-      const tl = gsap.timeline({
-        scrollTrigger: { trigger: row, start: 'top 85%' },
-      });
-
-      tl.from(year, { x: -20, opacity: 0, duration: 0.6, ease: 'power3.out' })
-        .from(row.querySelector('.timeline-company'), { y: 14, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.35')
-        .from(row.querySelector('.timeline-role'), { y: 10, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.3')
-        .from(items, { y: 10, opacity: 0, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, '-=0.25')
-        .from(tags, { opacity: 0, duration: 0.4 }, '-=0.15');
-    });
-  }
-
-  /* ============================================
-     BUILD SYSTEM FLOW
-     ============================================ */
-  function initBuildSystem() {
-    const flow = document.getElementById('buildFlow');
-    if (!flow) return;
-
-    const nodes = flow.querySelectorAll('.build-node');
-    const connectors = flow.querySelectorAll('.build-connector');
+    const nodes = diagram.querySelectorAll('.arch-node');
+    const connectors = diagram.querySelectorAll('.arch-connector');
+    const branches = diagram.querySelectorAll('.arch-branch');
+    const led = document.getElementById('archLed');
+    const statusText = document.getElementById('archStatusText');
     const steps = nodes.length;
 
     ScrollTrigger.create({
-      trigger: flow,
+      trigger: diagram,
       start: 'top 75%',
-      end: 'bottom 55%',
-      scrub: 0.5,
+      end: 'bottom 60%',
+      scrub: 0.6,
       onUpdate: (self) => {
-        const activeCount = Math.round(self.progress * steps);
-        nodes.forEach((node, i) => node.classList.toggle('active', i < activeCount));
+        const activeCount = Math.ceil(self.progress * steps);
+
+        nodes.forEach((n, i) => n.classList.toggle('active', i < activeCount));
         connectors.forEach((c, i) => c.classList.toggle('active', i < activeCount - 1));
+        branches.forEach((b) => b.classList.toggle('active', activeCount > 2));
+
+        const complete = activeCount >= steps;
+        if (led) led.classList.toggle('live', complete);
+        connectors.forEach((c) => c.classList.toggle('running', complete));
+
+        if (statusText) {
+          if (complete) statusText.textContent = 'SYSTEM ONLINE';
+          else if (activeCount <= 1) statusText.textContent = 'SYSTEM STANDBY';
+          else statusText.textContent = 'BOOTING SERVICES...';
+        }
       },
+    });
+  }
+
+  /* ============================================
+     EXPERIENCE TIMELINE
+     ============================================ */
+  function initTimeline() {
+    const timeline = document.getElementById('timeline');
+    const rail = document.getElementById('timelineFill');
+    if (!timeline || !rail) return;
+
+    ScrollTrigger.create({
+      trigger: timeline,
+      start: 'top 75%',
+      end: 'bottom 80%',
+      scrub: 0.6,
+      onUpdate: (self) => {
+        rail.style.height = `${self.progress * 100}%`;
+      },
+    });
+
+    gsap.utils.toArray('.timeline-row').forEach((row) => {
+      const items = row.querySelectorAll('.timeline-list li');
+      const tags = row.querySelector('.timeline-tags');
+      const tagSpans = row.querySelectorAll('.timeline-tags span');
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: 'top 85%',
+          toggleClass: { targets: row, className: 'in-view' },
+        },
+      });
+
+      tl.from(row.querySelector('.timeline-year'), { x: -16, opacity: 0, duration: 0.6, ease: 'power3.out' })
+        .from(row.querySelector('.timeline-card'), { y: 18, opacity: 0, duration: 0.6, ease: 'power3.out' }, '-=0.4')
+        .from(row.querySelector('.timeline-company'), { y: 12, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.4')
+        .from(row.querySelector('.timeline-role'), { y: 10, opacity: 0, duration: 0.5, ease: 'power3.out' }, '-=0.3')
+        .from(items, { y: 10, opacity: 0, duration: 0.4, stagger: 0.06, ease: 'power2.out' }, '-=0.25')
+        .from(tags, { opacity: 0, duration: 0.3 }, '-=0.15')
+        .from(tagSpans, { y: 8, opacity: 0, duration: 0.35, stagger: 0.04, ease: 'power2.out' }, '-=0.2');
+    });
+  }
+
+  /* ============================================
+     TECHNOLOGY MATRIX
+     ============================================ */
+  function initMatrix() {
+    const modules = document.querySelectorAll('.module');
+    if (!modules.length) return;
+
+    modules.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        modules.forEach((b) => b.setAttribute('aria-expanded', 'false'));
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+    });
+
+    gsap.utils.toArray('.matrix-col').forEach((el, i) => {
+      const modules = el.querySelectorAll('.module');
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 90%',
+          toggleClass: { targets: el, className: 'active' },
+        },
+        delay: (i % 3) * 0.08,
+      });
+      tl.from(el, { y: 24, opacity: 0, duration: 0.6, ease: 'power3.out' })
+        .from(modules, { y: 12, opacity: 0, duration: 0.4, stagger: 0.05, ease: 'power2.out' }, '-=0.35');
     });
   }
 
@@ -338,6 +354,126 @@
   }
 
   /* ============================================
+     SCROLL REVEALS (general)
+     ============================================ */
+  function initScrollAnimations() {
+    gsap.utils.toArray('.philosophy-statement, .philosophy-text').forEach((el) => {
+      gsap.from(el, {
+        y: 24,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+      });
+    });
+
+    const eduRow = document.querySelector('.education-row');
+    if (eduRow) {
+      gsap.from(eduRow, {
+        y: 20,
+        opacity: 0,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: eduRow, start: 'top 92%' },
+      });
+    }
+
+    const terminal = document.querySelector('.terminal');
+    if (terminal) {
+      gsap.from(terminal, {
+        y: 24,
+        opacity: 0,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: terminal, start: 'top 88%' },
+      });
+    }
+  }
+
+  /* ============================================
+     CONTACT TERMINAL TYPING
+     ============================================ */
+  function initTerminalTyping() {
+    const el = document.getElementById('terminalReadyText');
+    const terminal = document.querySelector('.terminal');
+    if (!el || !terminal) return;
+
+    const fullText = '> READY FOR CONNECTION.';
+
+    if (reduceMotion) {
+      el.textContent = fullText;
+      return;
+    }
+
+    ScrollTrigger.create({
+      trigger: terminal,
+      start: 'top 80%',
+      once: true,
+      onEnter: () => {
+        let i = 0;
+        const iv = setInterval(() => {
+          i += 1;
+          el.textContent = fullText.slice(0, i);
+          if (i >= fullText.length) clearInterval(iv);
+        }, 26);
+      },
+    });
+  }
+
+  /* ============================================
+     SYSTEM ASSISTANT (PM-09)
+     ============================================ */
+  function initSystemAssistant() {
+    const dial = document.getElementById('assistantDial');
+    const bubble = document.getElementById('assistantBubble');
+    const text = document.getElementById('assistantText');
+    const needle = document.getElementById('dialNeedle');
+    if (!dial || !bubble || !text) return;
+
+    let hideTimer = null;
+
+    const showMessage = (msg) => {
+      text.textContent = msg;
+      bubble.classList.add('show');
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => bubble.classList.remove('show'), 3200);
+    };
+
+    if (!reduceMotion && needle) {
+      gsap.to(needle, {
+        rotation: 360,
+        transformOrigin: '50% 50%',
+        svgOrigin: '30 30',
+        duration: 9,
+        repeat: -1,
+        ease: 'none',
+      });
+    }
+
+    dial.addEventListener('click', () => showMessage('SYSTEM READY.'));
+
+    const triggers = [
+      { selector: '#projects', message: 'PROJECT SCANNED.' },
+      { selector: '#architecture', message: 'API CONNECTION STABLE.' },
+      { selector: '#experience', message: 'TIMELINE UPDATED.' },
+      { selector: '#contact', message: 'CHANNEL OPEN.' },
+    ];
+
+    triggers.forEach(({ selector, message }) => {
+      const el = document.querySelector(selector);
+      if (!el) return;
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 60%',
+        once: true,
+        onEnter: () => showMessage(message),
+      });
+    });
+
+    setTimeout(() => showMessage('SYSTEM READY.'), reduceMotion ? 300 : 1900);
+  }
+
+  /* ============================================
      BACK TO TOP
      ============================================ */
   function initBackToTop() {
@@ -354,7 +490,7 @@
   }
 
   /* ============================================
-     ACCESSIBILITY
+     ACCESSIBILITY / ANCHOR SCROLL
      ============================================ */
   function initAccessibility() {
     document.querySelectorAll('a[href^="#"]').forEach((link) => {
@@ -380,16 +516,19 @@
     initLenis();
     initNavigation();
     initCursor();
-    initProjectInteractions();
-    initExperienceAnimations();
-    initScrollAnimations();
-    initBuildSystem();
+    initArchive();
+    initArchitectureDiagram();
+    initTimeline();
+    initMatrix();
     initTechMarquee();
     initMagneticButtons();
+    initScrollAnimations();
+    initTerminalTyping();
+    initSystemAssistant();
     initBackToTop();
     initAccessibility();
 
-    initLoader().then(() => {
+    initBoot().then(() => {
       initHeroAnimation();
       ScrollTrigger.refresh();
     });
