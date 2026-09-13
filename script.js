@@ -452,6 +452,20 @@
 
     dial.addEventListener('click', () => showMessage('SYSTEM READY.'));
 
+    const assistantEl = document.getElementById('assistant');
+    const hero = document.getElementById('top');
+    if (assistantEl && hero) {
+      ScrollTrigger.create({
+        trigger: hero,
+        start: 'bottom top',
+        onEnter: () => {
+          assistantEl.classList.add('visible');
+          showMessage('SYSTEM READY.');
+        },
+        onLeaveBack: () => assistantEl.classList.remove('visible'),
+      });
+    }
+
     const triggers = [
       { selector: '#projects', message: 'PROJECT SCANNED.' },
       { selector: '#architecture', message: 'API CONNECTION STABLE.' },
@@ -469,8 +483,6 @@
         onEnter: () => showMessage(message),
       });
     });
-
-    setTimeout(() => showMessage('SYSTEM READY.'), reduceMotion ? 300 : 1900);
   }
 
   /* ============================================
